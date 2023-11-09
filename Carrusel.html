@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Carrusel de Imágenes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            color: #fff;
+        }
+        
+        #carousel-container {
+            max-width: 80%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #carousel-title {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        #image-slider {
+            display: flex;
+            transition: transform 0.5s;
+        }
+        
+        .slide {
+            min-width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .slide img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        #prev,
+        #next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+        
+        #prev {
+            left: 0;
+        }
+        
+        #next {
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="carousel-container">
+        <h1 id="carousel-title">Carrusel de Imágenes</h1>
+        <div id="image-slider">
+            <div class="slide">
+                <img src="banner1.webp" alt="Imagen 1">
+            </div>
+            <div class="slide">
+                <img src="banner2.webp" alt="Imagen 2">
+            </div>
+            <div class="slide">
+                <img src="banner3.webp" alt="Imagen 3">
+            </div>
+        </div>
+        <div id="prev" onclick="changeSlide(-1)">
+            <</div>
+                <div id="next" onclick="changeSlide(1)">></div>
+        </div>
+
+        <script>
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+
+            function changeSlide(offset) {
+                currentSlide += offset;
+                if (currentSlide < 0) currentSlide = slides.length - 1;
+                if (currentSlide >= slides.length) currentSlide = 0;
+                updateCarousel();
+            }
+
+            function updateCarousel() {
+                const slider = document.getElementById('image-slider');
+                slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+
+            updateCarousel();
+        </script>
+</body>
+
+</html>
